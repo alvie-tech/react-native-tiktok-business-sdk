@@ -45,7 +45,7 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib plugin/build",
     "build:plugin": "tsc -p plugin/tsconfig.json",
-    "prepare": "bob build && yarn build:plugin",
+    "prepare": "bob build && npm run build:plugin",
     "release": "dotenv release-it --"
   },
   "keywords": [
