@@ -1,0 +1,39 @@
+name: Publish to npm
+
+# Manual publishing: triggered when a GitHub Release is published
+# (e.g. tag `v1.6.2`). The package is prebuilt, then pushed to the public
+# npm registry as `@alvie-tech/react-native-tiktok-business-sdk`.
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      # Rewrite the .npmrc with NODE_AUTH_TOKEN-based auth for `npm publish`.
+      - name: Configure npm registry auth
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+
+      # Explicit build with the repo's package manager (Yarn Berry): generates
+      # `lib/` + `plugin/build/`. Works around Yarn Berry not running `prepare`
+      # reliably.
+      - name: Build package
+        run: yarn prepare
+
+      # `access: public` comes from publishConfig. The tarball is already built
+      # above; fall back to `npm publish --ignore-scripts` if the `prepare`
+      # re-run via npm ever causes trouble.
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

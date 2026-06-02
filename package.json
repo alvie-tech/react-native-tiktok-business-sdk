@@ -1,5 +1,5 @@
 {
-  "name": "react-native-tiktok-business-sdk",
+  "name": "@alvie-tech/react-native-tiktok-business-sdk",
   "version": "1.6.2",
   "description": "A React Native bridge for the TikTok Business SDK",
   "source": "./src/index.tsx",
@@ -60,16 +60,20 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mtebele/react-native-tiktok-business.git"
+    "url": "git+https://github.com/alvie-tech/react-native-tiktok-business-sdk.git"
   },
-  "author": "Matias Tebele <mati.tebele@gmail.com> (https://github.com/mtebele)",
+  "author": "Alvie <tech@alvie.fr> (https://github.com/alvie-tech)",
+  "contributors": [
+    "Matias Tebele <mati.tebele@gmail.com> (https://github.com/mtebele)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mtebele/react-native-tiktok-business/issues"
+    "url": "https://github.com/alvie-tech/react-native-tiktok-business-sdk/issues"
   },
-  "homepage": "https://github.com/mtebele/react-native-tiktok-business#readme",
+  "homepage": "https://github.com/alvie-tech/react-native-tiktok-business-sdk#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",

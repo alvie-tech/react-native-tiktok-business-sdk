@@ -1,9 +1,11 @@
-# react-native-tiktok-business-sdk
+# @alvie-tech/react-native-tiktok-business-sdk
 
-[![npm version](https://img.shields.io/npm/v/react-native-tiktok-business-sdk.svg)](https://www.npmjs.com/package/react-native-tiktok-business-sdk)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/mtebele/react-native-tiktok-business-sdk/ci.yml)](https://github.com/mtebele/react-native-tiktok-business-sdk/actions)
-[![npm downloads](https://img.shields.io/npm/dw/react-native-tiktok-business-sdk.svg)](https://www.npmjs.com/package/react-native-tiktok-business-sdk)
-[![License](https://img.shields.io/npm/l/react-native-tiktok-business-sdk.svg)](https://github.com/mtebele/react-native-tiktok-business-sdk/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@alvie-tech/react-native-tiktok-business-sdk.svg)](https://www.npmjs.com/package/@alvie-tech/react-native-tiktok-business-sdk)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/alvie-tech/react-native-tiktok-business-sdk/ci.yml)](https://github.com/alvie-tech/react-native-tiktok-business-sdk/actions)
+[![npm downloads](https://img.shields.io/npm/dw/@alvie-tech/react-native-tiktok-business-sdk.svg)](https://www.npmjs.com/package/@alvie-tech/react-native-tiktok-business-sdk)
+[![License](https://img.shields.io/npm/l/@alvie-tech/react-native-tiktok-business-sdk.svg)](https://github.com/alvie-tech/react-native-tiktok-business-sdk/blob/main/LICENSE)
+
+> Fork of [`react-native-tiktok-business-sdk`](https://github.com/mtebele/react-native-tiktok-business-sdk) by Matias Tebele, published under the `@alvie-tech` scope with an added Expo config plugin.
 
 A React Native bridge for the TikTok Business SDK
 
@@ -24,9 +26,9 @@ This library provides a modern, promise-based interface for the TikTok Business 
 Install the package using npm (or yarn):
 
 ```sh
-npm install react-native-tiktok-business-sdk
+npm install @alvie-tech/react-native-tiktok-business-sdk
 
-yarn add react-native-tiktok-business-sdk
+yarn add @alvie-tech/react-native-tiktok-business-sdk
 ```
 
 ### Expo / Continuous Native Generation
@@ -38,7 +40,7 @@ If your app uses Expo (managed or with Continuous Native Generation), add the bu
   "expo": {
     "plugins": [
       [
-        "react-native-tiktok-business-sdk",
+        "@alvie-tech/react-native-tiktok-business-sdk",
         {
           "ios": {
             "tiktokAppId": "YOUR_IOS_TIKTOK_APP_ID",
@@ -98,7 +100,7 @@ Below are examples of how to use the various methods exposed by the library.
 The package exposes a main object, TikTokBusiness, that aggregates all the methods and enums. For example:
 
 ```js
-import { TikTokBusiness } from 'react-native-tiktok-business-sdk';
+import { TikTokBusiness } from '@alvie-tech/react-native-tiktok-business-sdk';
 ```
 
 ### Initialize the SDK
@@ -170,8 +172,8 @@ await TikTokBusiness.initializeSdk(
 By default, the TikTok SDK automatically reports install, launch, 2D-retention, and in-app purchase events. You can disable any of these at initialization time by passing an optional `options` object:
 
 ```js
-import { TikTokBusiness } from 'react-native-tiktok-business-sdk';
-import type { TikTokSdkConfig } from 'react-native-tiktok-business-sdk';
+import { TikTokBusiness } from '@alvie-tech/react-native-tiktok-business-sdk';
+import type { TikTokSdkConfig } from '@alvie-tech/react-native-tiktok-business-sdk';
 
 // Disable all automatic events
 await TikTokBusiness.initializeSdk(
@@ -243,7 +245,7 @@ async function logoutUser() {
 Use `trackEvent` to report standard events. You can optionally pass an event ID and additional properties.
 
 ```js
-import { TikTokBusiness, TikTokEventName } from 'react-native-tiktok-business-sdk';
+import { TikTokBusiness, TikTokEventName } from '@alvie-tech/react-native-tiktok-business-sdk';
 
 async function trackStandardEvent() {
   try {
@@ -276,7 +278,7 @@ import {
   TikTokContentEventName, 
   TikTokContentEventParameter, 
   TikTokContentEventContentsParameter 
-} from 'react-native-tiktok-business-sdk';
+} from '@alvie-tech/react-native-tiktok-business-sdk';
 
 async function trackContentEvent() {
   try {
@@ -326,8 +328,8 @@ async function trackCustomEvent() {
 Track impression-level ad revenue data using the `trackAdRevenueEvent` method. This is useful for monetization tracking with ad networks like AdMob, Unity, IronSource, etc.
 
 ```js
-import { TikTokBusiness, trackAdRevenueEvent } from 'react-native-tiktok-business-sdk';
-import type { AdRevenueData } from 'react-native-tiktok-business-sdk';
+import { TikTokBusiness, trackAdRevenueEvent } from '@alvie-tech/react-native-tiktok-business-sdk';
+import type { AdRevenueData } from '@alvie-tech/react-native-tiktok-business-sdk';
 
 async function trackAdRevenue() {
   try {
@@ -440,8 +442,8 @@ import {
   TikTokContentEventName,
   TikTokContentEventParameter,
   TikTokContentEventContentsParameter,
-} from 'react-native-tiktok-business-sdk';
-import type { AdRevenueData } from 'react-native-tiktok-business-sdk';
+} from '@alvie-tech/react-native-tiktok-business-sdk';
+import type { AdRevenueData } from '@alvie-tech/react-native-tiktok-business-sdk';
 ```
 
 ## Error Handling
