@@ -66,7 +66,7 @@ jobs:
       # `example/node_modules/`, which npm hoists out of when workspaces
       # are used — Yarn Berry kept it nested via nmHoistingLimits).
       - name: Install example dependencies
-        run: cd example && npm ci
+        run: cd example && npm ci --workspaces=false
 
       - name: Cache turborepo for Android
         uses: actions/cache@v4
@@ -125,7 +125,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Install example dependencies
-        run: cd example && npm ci
+        run: cd example && npm ci --workspaces=false
 
       - name: Cache turborepo for iOS
         uses: actions/cache@v4

@@ -10,6 +10,12 @@ runs:
         node-version-file: .nvmrc
         cache: 'npm'
 
-    - name: Install dependencies
-      run: npm ci
+    # --workspaces=false keeps the example/ workspace deps out of root
+    # node_modules. RN's example/android/settings.gradle expects
+    # `@react-native/gradle-plugin` at `example/node_modules/`, which
+    # Yarn Berry kept nested via nmHoistingLimits: workspaces; npm has
+    # no equivalent. example/ is installed standalone in build-android
+    # and build-ios via `cd example && npm ci --workspaces=false`.
+    - name: Install root dependencies
+      run: npm ci --workspaces=false
       shell: bash
