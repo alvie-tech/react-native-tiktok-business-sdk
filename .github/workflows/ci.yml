@@ -61,11 +61,18 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      # `example/` is not declared as an npm workspace (RN's
+      # settings.gradle expects `@react-native/gradle-plugin` in
+      # `example/node_modules/`, which npm hoists out of when workspaces
+      # are used — Yarn Berry kept it nested via nmHoistingLimits).
+      - name: Install example dependencies
+        run: cd example && npm ci
+
       - name: Cache turborepo for Android
         uses: actions/cache@v4
         with:
           path: ${{ env.TURBO_CACHE_DIR }}
-          key: ${{ runner.os }}-turborepo-android-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-turborepo-android-${{ hashFiles('package-lock.json', 'example/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-turborepo-android-
 
@@ -117,11 +124,14 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Install example dependencies
+        run: cd example && npm ci
+
       - name: Cache turborepo for iOS
         uses: actions/cache@v4
         with:
           path: ${{ env.TURBO_CACHE_DIR }}
-          key: ${{ runner.os }}-turborepo-ios-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-turborepo-ios-${{ hashFiles('package-lock.json', 'example/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-turborepo-ios-
 

@@ -111,9 +111,6 @@
       "optional": true
     }
   },
-  "workspaces": [
-    "example"
-  ],
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
