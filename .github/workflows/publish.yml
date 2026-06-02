@@ -1,0 +1,57 @@
+name: Publish to GitHub Packages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dist_tag:
+        description: 'npm dist-tag for this publish'
+        required: false
+        default: 'latest'
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      DIST_TAG: ${{ inputs.dist_tag || 'latest' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@alvie-tech'
+          cache: 'npm'
+
+      # --workspaces=false skips the `example/` RN app workspace
+      # (different React/RN versions; only needed for local dev, not for publish).
+      # The root `prepare` lifecycle script runs here and produces
+      # lib/ + plugin/build/, which `files` exposes in the tarball.
+      - name: Install root dependencies
+        run: npm ci --workspaces=false
+
+      - name: Verify build artifacts
+        run: |
+          set -e
+          test -f lib/commonjs/index.js
+          test -f lib/module/index.js
+          test -f lib/typescript/module/src/index.d.ts
+          test -f lib/typescript/commonjs/src/index.d.ts
+          test -f plugin/build/withTikTokBusiness.js
+          test -f app.plugin.js
+
+      - name: Pack (dry-run) for visibility
+        run: npm pack --dry-run
+
+      - name: Publish to GitHub Packages
+        run: npm publish --access public --tag "$DIST_TAG"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

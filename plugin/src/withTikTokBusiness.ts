@@ -7,7 +7,7 @@ import {
 } from '@expo/config-plugins';
 import type { InfoPlist } from '@expo/config-plugins/build/ios/IosConfig.types';
 
-const pkg = require('react-native-tiktok-business-sdk/package.json');
+const pkg = require('../../package.json');
 
 const TIKTOK_SKADNETWORK_ID = '22mmun2rn5.skadnetwork';
 const TIKTOK_QUERY_SCHEMES = ['tiktok', 'snssdk1233', 'snssdk1180'];

@@ -1,5 +1,5 @@
 {
-  "name": "react-native-tiktok-business-sdk",
+  "name": "@alvie-tech/react-native-tiktok-business-sdk",
   "version": "1.6.2",
   "description": "A React Native bridge for the TikTok Business SDK",
   "source": "./src/index.tsx",
@@ -60,16 +60,19 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mtebele/react-native-tiktok-business.git"
+    "url": "git+https://github.com/alvie-tech/react-native-tiktok-business-sdk.git"
   },
   "author": "Matias Tebele <mati.tebele@gmail.com> (https://github.com/mtebele)",
+  "contributors": [
+    "Alvie Tech (https://github.com/alvie-tech)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mtebele/react-native-tiktok-business/issues"
+    "url": "https://github.com/alvie-tech/react-native-tiktok-business-sdk/issues"
   },
-  "homepage": "https://github.com/mtebele/react-native-tiktok-business#readme",
+  "homepage": "https://github.com/alvie-tech/react-native-tiktok-business-sdk#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
@@ -94,7 +97,7 @@
     "turbo": "^1.10.7",
     "typescript": "^5.2.2"
   },
-  "resolutions": {
+  "overrides": {
     "@types/react": "^18.2.44",
     "conventional-changelog-conventionalcommits": "9.0.0"
   },
@@ -111,7 +114,6 @@
   "workspaces": [
     "example"
   ],
-  "packageManager": "yarn@3.6.1",
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
@@ -183,7 +185,8 @@
   },
   "eslintIgnore": [
     "node_modules/",
-    "lib/"
+    "lib/",
+    "plugin/build/"
   ],
   "prettier": {
     "quoteProps": "consistent",
