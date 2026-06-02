@@ -1,8 +1,8 @@
 name: Publish to npm
 
-# Publication manuelle : déclenchée par la publication d'une GitHub Release
-# (ex. tag `v1.6.2`). Le paquet est prébuildé puis poussé sur le registre npm
-# public sous `@alvie-tech/react-native-tiktok-business-sdk`.
+# Manual publishing: triggered when a GitHub Release is published
+# (e.g. tag `v1.6.2`). The package is prebuilt, then pushed to the public
+# npm registry as `@alvie-tech/react-native-tiktok-business-sdk`.
 on:
   release:
     types: [published]
@@ -17,20 +17,22 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      # Réécrit le .npmrc avec l'auth basée sur NODE_AUTH_TOKEN pour `npm publish`.
+      # Rewrite the .npmrc with NODE_AUTH_TOKEN-based auth for `npm publish`.
       - name: Configure npm registry auth
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org
 
-      # Build explicite avec le PM du repo (Yarn Berry) : génère `lib/` + `plugin/build/`.
-      # Contourne le fait que `prepare` n'est pas exécuté de façon fiable sous Yarn Berry.
+      # Explicit build with the repo's package manager (Yarn Berry): generates
+      # `lib/` + `plugin/build/`. Works around Yarn Berry not running `prepare`
+      # reliably.
       - name: Build package
         run: yarn prepare
 
-      # `access: public` provient de publishConfig. La tarball est déjà construite ci-dessus ;
-      # si le re-build via `prepare` posait souci, replier sur `npm publish --ignore-scripts`.
+      # `access: public` comes from publishConfig. The tarball is already built
+      # above; fall back to `npm publish --ignore-scripts` if the `prepare`
+      # re-run via npm ever causes trouble.
       - name: Publish to npm
         run: npm publish
         env:
